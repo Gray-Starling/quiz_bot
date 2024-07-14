@@ -1,2 +1,5 @@
 /.conda
 /.env
+logs
+__pycache__
+*.db
