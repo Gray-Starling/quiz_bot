@@ -287,7 +287,6 @@ async def update_user_current_quiz_id(user_id, id):
     try:
         async with aiosqlite.connect(DB_NAME) as db:
             await db.execute('UPDATE quiz_state SET current_question_id = ? WHERE user_id = ?', (id, user_id))
-            # Если запись для user_id не существует, вставляем новую
             await db.execute('INSERT OR IGNORE INTO quiz_state (user_id, current_question_id) VALUES (?, ?)', (user_id, id))
             await db.commit()
     except Exception as e:
